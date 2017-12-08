@@ -10,18 +10,21 @@ import UIKit
 
 class PublishViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var contentTextView: UITextView!
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var selectedImageView: UIImageView!
     let imagePicker = UIImagePickerController()
     var image: UIImage = #imageLiteral(resourceName: "icon_photo")
     var article = Article(title: "", content: "", image: #imageLiteral(resourceName: "icon_photo"))
+    var originalTitle = ""
     var isUpdateArticle = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         imagePicker.delegate = self
+        saveButton.layer.cornerRadius = 22
         self.navigationController?.setNavigationBarHidden(true, animated: true)
         contentTextView.text = self.article.content
         titleTextField.text = self.article.title
@@ -45,7 +48,7 @@ class PublishViewController: UIViewController, UIImagePickerControllerDelegate, 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            selectedImageView.contentMode = .scaleAspectFit
+            selectedImageView.contentMode = .scaleToFill
             selectedImageView.image = image
             selectedImageView.frame = .init(origin: .zero, size: image.size)
             self.image = image
@@ -57,6 +60,7 @@ class PublishViewController: UIViewController, UIImagePickerControllerDelegate, 
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
+    
     @IBAction func saveArticle(_ sender: Any) {
         
         let titleText = self.titleTextField.text!
@@ -65,7 +69,7 @@ class PublishViewController: UIViewController, UIImagePickerControllerDelegate, 
         self.article = Article(title: titleText, content: contentText, image: self.image)
         
         if isUpdateArticle {
-            ArticleManager.shared.update(article: self.article)
+            ArticleManager.shared.update(article: self.article, originalTitle: originalTitle)
         } else {
             ArticleManager.shared.save(article: self.article)
         }
@@ -74,6 +78,7 @@ class PublishViewController: UIViewController, UIImagePickerControllerDelegate, 
         self.navigationController?.popToRootViewController(animated: true)
         
     }
+    
     @IBAction func dimissButton(_ sender: Any) {
         
         self.navigationController?.setNavigationBarHidden(false, animated: true)

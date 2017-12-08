@@ -17,7 +17,7 @@ class MainPageTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
+
         journalImageView.layer.cornerRadius = 8
         self.journalImageView.layer.masksToBounds = false
         self.journalImageView.layer.shadowOffset = CGSize(width: 0, height: 0)

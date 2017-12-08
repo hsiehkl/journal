@@ -14,12 +14,5 @@ struct Article {
     var title: String
     var content: String
     var image: UIImage
-    
-//    init(title: String, content: String, image: UIImage? = nil) {
-//
-//        self.title = title
-//        self.content = content
-//        self.image = image
-//
-//    }
+
 }

@@ -110,11 +110,13 @@ class MainPageViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //
+        
         let publishViewController = self.storyboard?.instantiateViewController(withIdentifier: "publishViewController") as! PublishViewController
 
         publishViewController.isUpdateArticle = true
         publishViewController.article = self.articles[indexPath.row]
+        publishViewController.image = self.articles[indexPath.row].image
+        publishViewController.originalTitle = self.articles[indexPath.row].title
         self.navigationController?.pushViewController(publishViewController, animated: true)
         
     }
