@@ -10,8 +10,12 @@ import UIKit
 
 class PublishViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    @IBOutlet weak var contentTextField: UITextField!
+    @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var selectedImageView: UIImageView!
     let imagePicker = UIImagePickerController()
+    var image: UIImage = #imageLiteral(resourceName: "icon_photo")
+    var article = Article(title: "", content: "", image: #imageLiteral(resourceName: "icon_photo"))
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,17 +29,6 @@ class PublishViewController: UIViewController, UIImagePickerControllerDelegate, 
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
     @IBAction func selectImageButton(_ sender: Any) {
         imagePicker.allowsEditing = false
@@ -50,6 +43,7 @@ class PublishViewController: UIViewController, UIImagePickerControllerDelegate, 
             selectedImageView.contentMode = .scaleAspectFit
             selectedImageView.image = image
             selectedImageView.frame = .init(origin: .zero, size: image.size)
+            self.image = image
         }
         
         dismiss(animated: true, completion: nil)
@@ -57,5 +51,18 @@ class PublishViewController: UIViewController, UIImagePickerControllerDelegate, 
     
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
+    }
+    @IBAction func saveArticle(_ sender: Any) {
+        
+        let titleText = self.titleTextField.text!
+        let contentText = self.contentTextField.text!
+        
+        self.article = Article(title: titleText, content: contentText, image: self.image)
+        
+        ArticleManager.shared.save(article: self.article)
+        
+    }
+    @IBAction func dimissButton(_ sender: Any) {
+         self.navigationController?.popToRootViewController(animated: true)
     }
 }

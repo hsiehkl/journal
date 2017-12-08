@@ -166,6 +166,9 @@
                                         <state key="normal" title="Save">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="saveArticle:" destination="bbD-PA-EQO" eventType="touchUpInside" id="Sag-IH-FvP"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -219,6 +222,9 @@
                                     <constraint firstAttribute="width" constant="36" id="xde-E3-GTt"/>
                                 </constraints>
                                 <state key="normal" image="button_close"/>
+                                <connections>
+                                    <action selector="dimissButton:" destination="bbD-PA-EQO" eventType="touchUpInside" id="ciV-Gq-hWc"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -248,7 +254,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="contentTextField" destination="ufE-m0-vgP" id="Yw0-VP-WoF"/>
                         <outlet property="selectedImageView" destination="dkA-vC-40m" id="oII-ZE-zFw"/>
+                        <outlet property="titleTextField" destination="TqZ-cC-8R6" id="nT8-2j-kMZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2GI-fX-c9v" userLabel="First Responder" sceneMemberID="firstResponder"/>

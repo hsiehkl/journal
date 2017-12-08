@@ -11,12 +11,10 @@ import UIKit
 class MainPageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var mainPageTableView: UITableView!
+    var articles = [Article]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.mainPageTableView.delegate = self
-        self.mainPageTableView.dataSource = self
 
         setupNavigationBar()
     }
@@ -31,7 +29,7 @@ class MainPageViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return articles.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -42,6 +40,46 @@ class MainPageViewController: UIViewController, UITableViewDataSource, UITableVi
             return mainPageCell
         }
         return MainPageTableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 212
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        //1
+        guard let appDelegate =
+            UIApplication.shared.delegate as? AppDelegate else {
+                return
+        }
+        
+        let context = appDelegate.persistentContainer.viewContext
+        
+        
+        do {
+            let articlesData = try context.fetch(ArticleData.fetchRequest())
+
+            print("it's here! \(articlesData)")
+            
+//
+//            for data in articlesData {
+//
+//
+//                guard
+//                    let title = data.title as? String,
+//                    let content = data.content as? String,
+//                ,                   let image: Data = (data as AnyObject).image as? Data
+//                    let decodedimage = UIImage(data: image)
+//            }
+            DispatchQueue.main.async {
+                self.mainPageTableView.reloadData()
+            }
+        } catch {
+            print("Couldn't Fetch Data")
+        }
+        
     }
 
     
