@@ -18,6 +18,8 @@
 		6BF590EB1FDA3CF5006A8DF4 /* PublishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF590EA1FDA3CF5006A8DF4 /* PublishViewController.swift */; };
 		6BF590EE1FDA3F84006A8DF4 /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 6BF590ED1FDA3F84006A8DF4 /* image.jpg */; };
 		6BF590F01FDA4DAD006A8DF4 /* AriticleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF590EF1FDA4DAD006A8DF4 /* AriticleManager.swift */; };
+		6BF590F51FDA73F2006A8DF4 /* ArticleData+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF590F31FDA73F2006A8DF4 /* ArticleData+CoreDataClass.swift */; };
+		6BF590F61FDA73F2006A8DF4 /* ArticleData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF590F41FDA73F2006A8DF4 /* ArticleData+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		6BF590EA1FDA3CF5006A8DF4 /* PublishViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublishViewController.swift; sourceTree = "<group>"; };
 		6BF590ED1FDA3F84006A8DF4 /* image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image.jpg; sourceTree = "<group>"; };
 		6BF590EF1FDA4DAD006A8DF4 /* AriticleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AriticleManager.swift; sourceTree = "<group>"; };
+		6BF590F31FDA73F2006A8DF4 /* ArticleData+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ArticleData+CoreDataClass.swift"; path = "journal/ArticleData+CoreDataClass.swift"; sourceTree = "<group>"; };
+		6BF590F41FDA73F2006A8DF4 /* ArticleData+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "ArticleData+CoreDataProperties.swift"; path = "journal/ArticleData+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +54,8 @@
 		6BF590BC1FDA1F68006A8DF4 = {
 			isa = PBXGroup;
 			children = (
+				6BF590F31FDA73F2006A8DF4 /* ArticleData+CoreDataClass.swift */,
+				6BF590F41FDA73F2006A8DF4 /* ArticleData+CoreDataProperties.swift */,
 				6BF590C71FDA1F68006A8DF4 /* journal */,
 				6BF590C61FDA1F68006A8DF4 /* Products */,
 			);
@@ -158,6 +164,8 @@
 				6BF590F01FDA4DAD006A8DF4 /* AriticleManager.swift in Sources */,
 				6BF590E91FDA3C39006A8DF4 /* ArticleStruct.swift in Sources */,
 				6BF590D11FDA1F68006A8DF4 /* journal.xcdatamodeld in Sources */,
+				6BF590F61FDA73F2006A8DF4 /* ArticleData+CoreDataProperties.swift in Sources */,
+				6BF590F51FDA73F2006A8DF4 /* ArticleData+CoreDataClass.swift in Sources */,
 				6BF590EB1FDA3CF5006A8DF4 /* PublishViewController.swift in Sources */,
 				6BF590E41FDA2EC2006A8DF4 /* MainPageViewController.swift in Sources */,
 				6BF590C91FDA1F68006A8DF4 /* AppDelegate.swift in Sources */,

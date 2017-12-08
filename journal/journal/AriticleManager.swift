@@ -38,20 +38,6 @@ class ArticleManager {
         }
     }
     
-//    func fetch() -> [Article] {
-//        
-//        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-//            
-//            do {
-//                let articleArray = try context.fetch(ArticleData.fetchRequest())
-//                print(articleArray)
-// 
-//            } catch {
-//                print("Couldn't Fetch Data")
-//            }
-//        return
-//    }
-    
     func delete(article: Article) {
         
         let appDelegate = UIApplication.shared.delegate as? AppDelegate
@@ -82,9 +68,7 @@ class ArticleManager {
             print("searchCoreData error: \(error)")
         }
     }
-    
-    
-    
+
     
     
     

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class MainPageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -35,7 +36,8 @@ class MainPageViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let mainPageCell = mainPageTableView.dequeueReusableCell(withIdentifier: "mainPageCell") as? MainPageTableViewCell {
             
-            mainPageCell.journalImageView.image = UIImage(named: "image")
+            mainPageCell.journalImageView.image = articles[indexPath.row].image
+            mainPageCell.journalTitleLabel.text = articles[indexPath.row].title
             
             return mainPageCell
         }
@@ -49,30 +51,28 @@ class MainPageViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        //1
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
+        let context = ( UIApplication.shared.delegate as! AppDelegate ).persistentContainer.viewContext
+        let articleRequest: NSFetchRequest<ArticleData> = ArticleData.fetchRequest()
         
-        let context = appDelegate.persistentContainer.viewContext
-        
+        articles = []
         
         do {
-            let articlesData = try context.fetch(ArticleData.fetchRequest())
+            let articlesData = try context.fetch(articleRequest)
 
             print("it's here! \(articlesData)")
             
-//
-//            for data in articlesData {
-//
-//
-//                guard
-//                    let title = data.title as? String,
-//                    let content = data.content as? String,
-//                ,                   let image: Data = (data as AnyObject).image as? Data
-//                    let decodedimage = UIImage(data: image)
-//            }
+            for data in articlesData {
+                
+                guard
+                    let graphData = data.image,
+                    let title = data.title,
+                    let content = data.content,
+                    let graph = UIImage(data: graphData as Data)
+                    else { return }
+                let article = Article(title: title, content: content, image: graph)
+                articles.append(article)
+            }
+            
             DispatchQueue.main.async {
                 self.mainPageTableView.reloadData()
             }
@@ -101,7 +101,6 @@ class MainPageViewController: UIViewController, UITableViewDataSource, UITableVi
         let publishViewController = self.storyboard?.instantiateViewController(withIdentifier: "publishViewController") as! PublishViewController
 //        publishViewController.isImageSelected = false
 //        publishViewController.isAddAction = true
-        publishViewController.navigationController?.isNavigationBarHidden = true
         self.navigationController?.pushViewController(publishViewController, animated: true)
         
     }

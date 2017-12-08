@@ -21,6 +21,7 @@ class PublishViewController: UIViewController, UIImagePickerControllerDelegate, 
         super.viewDidLoad()
         
         imagePicker.delegate = self
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
 
         // Do any additional setup after loading the view.
     }
@@ -60,6 +61,8 @@ class PublishViewController: UIViewController, UIImagePickerControllerDelegate, 
         self.article = Article(title: titleText, content: contentText, image: self.image)
         
         ArticleManager.shared.save(article: self.article)
+        
+        self.navigationController?.popToRootViewController(animated: true)
         
     }
     @IBAction func dimissButton(_ sender: Any) {
