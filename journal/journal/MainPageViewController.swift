@@ -11,18 +11,55 @@ import CoreData
 
 class MainPageViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    @IBOutlet weak var hideNavigationBarView: UIView!
     @IBOutlet weak var mainPageTableView: UITableView!
     var articles = [Article]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        setupNavigationBar()
+        
+//        self.navigationController?.view.addSubview(hideNavigationBarView)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        setupNavigationBar()
+
+        let context = ( UIApplication.shared.delegate as! AppDelegate ).persistentContainer.viewContext
+        let articleRequest: NSFetchRequest<ArticleData> = ArticleData.fetchRequest()
+        
+        articles = []
+        
+        do {
+            let articlesData = try context.fetch(articleRequest)
+
+            print("it's here! \(articlesData)")
+            
+            for data in articlesData {
+                
+                guard
+                    let graphData = data.image,
+                    let title = data.title,
+                    let content = data.content,
+                    let graph = UIImage(data: graphData as Data)
+                    else { return }
+                let article = Article(title: title, content: content, image: graph)
+                articles.insert(article, at: 0)
+            }
+            
+            DispatchQueue.main.async {
+                self.mainPageTableView.reloadData()
+            }
+        } catch {
+            print("Couldn't Fetch Data")
+        }
+        
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -47,40 +84,41 @@ class MainPageViewController: UIViewController, UITableViewDataSource, UITableVi
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 212
     }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        let context = ( UIApplication.shared.delegate as! AppDelegate ).persistentContainer.viewContext
-        let articleRequest: NSFetchRequest<ArticleData> = ArticleData.fetchRequest()
-        
-        articles = []
-        
-        do {
-            let articlesData = try context.fetch(articleRequest)
-
-            print("it's here! \(articlesData)")
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let alertController = UIAlertController(title: "Delete Article", message: "Are you sure？", preferredStyle: UIAlertControllerStyle.alert)
             
-            for data in articlesData {
+            alertController.addAction(UIAlertAction(title: "Yes！", style: .default, handler: { (_) in
                 
-                guard
-                    let graphData = data.image,
-                    let title = data.title,
-                    let content = data.content,
-                    let graph = UIImage(data: graphData as Data)
-                    else { return }
-                let article = Article(title: title, content: content, image: graph)
-                articles.append(article)
-            }
-            
-            DispatchQueue.main.async {
+                let deletedArticle = self.articles[indexPath.row]
+                
+                ArticleManager.shared.delete(article: deletedArticle)
+                
+                self.articles.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+                
                 self.mainPageTableView.reloadData()
-            }
-        } catch {
-            print("Couldn't Fetch Data")
+                
+            }))
+            
+            alertController.addAction(UIAlertAction(title: "Let me keep it！", style: .cancel, handler: nil))
+            
+            self.present(alertController, animated: true, completion: nil)
+            
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //
+        let publishViewController = self.storyboard?.instantiateViewController(withIdentifier: "publishViewController") as! PublishViewController
+
+        publishViewController.isUpdateArticle = true
+        publishViewController.article = self.articles[indexPath.row]
+        self.navigationController?.pushViewController(publishViewController, animated: true)
         
     }
+
 
     
     func setupNavigationBar() {
@@ -91,16 +129,15 @@ class MainPageViewController: UIViewController, UITableViewDataSource, UITableVi
         button.setImage(#imageLiteral(resourceName: "icon_plus"), for: .normal)
         button.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
         button.tintColor = dustyOrange
-        button.addTarget(self, action: #selector(addNewJournal), for: .touchUpInside)
+        button.addTarget(self, action: #selector(addNewArticle), for: .touchUpInside)
         let addNewJournalButton = UIBarButtonItem(customView: button)
         self.navigationItem.rightBarButtonItem = addNewJournalButton
     }
     
-    @objc func addNewJournal() {
+    @objc func addNewArticle() {
         
         let publishViewController = self.storyboard?.instantiateViewController(withIdentifier: "publishViewController") as! PublishViewController
-//        publishViewController.isImageSelected = false
-//        publishViewController.isAddAction = true
+
         self.navigationController?.pushViewController(publishViewController, animated: true)
         
     }

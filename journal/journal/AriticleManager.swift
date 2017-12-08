@@ -68,6 +68,44 @@ class ArticleManager {
             print("searchCoreData error: \(error)")
         }
     }
+    
+    func update(article: Article) {
+        
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        guard let context = appDelegate?.persistentContainer.viewContext else { return }
+        
+        let request = NSFetchRequest<NSFetchRequestResult>(entityName: "ArticleData")
+        request.predicate = NSPredicate(format: "title == %@", article.title)
+        
+        do {
+            let request = try context.fetch(request)
+            
+            guard
+                let requestData = request as? [NSManagedObject] else { return }
+                
+                for object in requestData {
+                    
+                    if let articleTitle = object.value(forKey: "title") as? String {
+                        
+                        guard
+                            let imageData = UIImagePNGRepresentation(article.image) as NSData?
+                            else { return }
+
+                        object.setValue(article.title, forKey: "title")
+                        object.setValue(article.content, forKey: "content")
+                        object.setValue(imageData, forKey: "image")
+                        
+                        do {
+                            try context.save()
+                        } catch {
+                            print("core data save error: \(error)")
+                        }
+                    }
+                }
+        } catch {
+            print("searchCoreData error: \(error)")
+        }
+    }
 
     
     

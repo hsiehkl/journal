@@ -16,12 +16,16 @@ class PublishViewController: UIViewController, UIImagePickerControllerDelegate, 
     let imagePicker = UIImagePickerController()
     var image: UIImage = #imageLiteral(resourceName: "icon_photo")
     var article = Article(title: "", content: "", image: #imageLiteral(resourceName: "icon_photo"))
+    var isUpdateArticle = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         imagePicker.delegate = self
         self.navigationController?.setNavigationBarHidden(true, animated: true)
+        contentTextField.text = self.article.content
+        titleTextField.text = self.article.title
+        selectedImageView.image = self.article.image
 
         // Do any additional setup after loading the view.
     }
@@ -60,12 +64,17 @@ class PublishViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         self.article = Article(title: titleText, content: contentText, image: self.image)
         
-        ArticleManager.shared.save(article: self.article)
-        
+        if isUpdateArticle {
+            ArticleManager.shared.update(article: self.article)
+        } else {
+            ArticleManager.shared.save(article: self.article)
+        }
         self.navigationController?.popToRootViewController(animated: true)
         
     }
     @IBAction func dimissButton(_ sender: Any) {
-         self.navigationController?.popToRootViewController(animated: true)
+        
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        self.navigationController?.popToRootViewController(animated: true)
     }
 }
