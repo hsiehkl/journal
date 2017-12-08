@@ -125,6 +125,14 @@ class MainPageViewController: UIViewController, UITableViewDataSource, UITableVi
         
         let dustyOrange = UIColor(red: 237/255.0, green: 96/255.0, blue: 81/255.0, alpha: 1)
         
+        let longTitleLabel = UILabel()
+        longTitleLabel.text = "My Journals"
+        longTitleLabel.font = UIFont(name: "SFUIText-Semibold", size: 20.0)
+        longTitleLabel.sizeToFit()
+        
+        let leftItem = UIBarButtonItem(customView: longTitleLabel)
+        self.navigationItem.leftBarButtonItem = leftItem
+        
         let button = UIButton(type: .system)
         button.setImage(#imageLiteral(resourceName: "icon_plus"), for: .normal)
         button.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
@@ -141,5 +149,4 @@ class MainPageViewController: UIViewController, UITableViewDataSource, UITableVi
         self.navigationController?.pushViewController(publishViewController, animated: true)
         
     }
-
 }

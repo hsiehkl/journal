@@ -10,7 +10,7 @@ import UIKit
 
 class PublishViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    @IBOutlet weak var contentTextField: UITextField!
+    @IBOutlet weak var contentTextView: UITextView!
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var selectedImageView: UIImageView!
     let imagePicker = UIImagePickerController()
@@ -23,7 +23,7 @@ class PublishViewController: UIViewController, UIImagePickerControllerDelegate, 
         
         imagePicker.delegate = self
         self.navigationController?.setNavigationBarHidden(true, animated: true)
-        contentTextField.text = self.article.content
+        contentTextView.text = self.article.content
         titleTextField.text = self.article.title
         selectedImageView.image = self.article.image
 
@@ -60,7 +60,7 @@ class PublishViewController: UIViewController, UIImagePickerControllerDelegate, 
     @IBAction func saveArticle(_ sender: Any) {
         
         let titleText = self.titleTextField.text!
-        let contentText = self.contentTextField.text!
+        let contentText = self.contentTextView.text!
         
         self.article = Article(title: titleText, content: contentText, image: self.image)
         
@@ -69,6 +69,8 @@ class PublishViewController: UIViewController, UIImagePickerControllerDelegate, 
         } else {
             ArticleManager.shared.save(article: self.article)
         }
+        
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
         self.navigationController?.popToRootViewController(animated: true)
         
     }

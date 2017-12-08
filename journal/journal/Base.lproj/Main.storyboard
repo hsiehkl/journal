@@ -188,29 +188,23 @@
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Setup Title" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TqZ-cC-8R6">
-                                <rect key="frame" x="22" y="405" width="331" height="36"/>
+                                <rect key="frame" x="22" y="407" width="331" height="36"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="36" id="09a-z2-HXW"/>
                                 </constraints>
                                 <color key="textColor" red="0.26274509800000001" green="0.3411764706" blue="0.3803921569" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="30"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Say Something!" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ufE-m0-vgP">
-                                <rect key="frame" x="22" y="462" width="331" height="141"/>
-                                <color key="textColor" red="0.51372549019607838" green="0.61176470588235299" blue="0.59607843137254901" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="29"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nE5-YO-bCK">
-                                <rect key="frame" x="22" y="451" width="331" height="1"/>
+                                <rect key="frame" x="22" y="453" width="331" height="1"/>
                                 <color key="backgroundColor" red="0.6705882353" green="0.70196078429999997" blue="0.69019607839999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.5" id="SYx-Uf-cTG"/>
                                     <constraint firstAttribute="width" constant="331" id="Tt2-Qx-1VX"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wLy-sf-MBc">
+                            <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wLy-sf-MBc">
                                 <rect key="frame" x="0.0" y="20" width="375" height="375"/>
                                 <connections>
                                     <action selector="selectImageButton:" destination="bbD-PA-EQO" eventType="touchUpInside" id="4xl-dc-4eW"/>
@@ -227,19 +221,27 @@
                                     <action selector="dimissButton:" destination="bbD-PA-EQO" eventType="touchUpInside" id="ciV-Gq-hWc"/>
                                 </connections>
                             </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="PJc-bi-4Fq">
+                                <rect key="frame" x="22" y="464" width="331" height="139"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" red="0.26274509800000001" green="0.34901960780000002" blue="0.3803921569" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="18"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="TqZ-cC-8R6" secondAttribute="trailing" constant="22" id="0Hl-kz-oTA"/>
-                            <constraint firstItem="Tow-Yv-ojK" firstAttribute="top" secondItem="ufE-m0-vgP" secondAttribute="bottom" id="3KW-uf-5XY"/>
-                            <constraint firstItem="TqZ-cC-8R6" firstAttribute="top" secondItem="dkA-vC-40m" secondAttribute="bottom" constant="10" id="8K1-AY-FrX"/>
+                            <constraint firstItem="TqZ-cC-8R6" firstAttribute="top" secondItem="dkA-vC-40m" secondAttribute="bottom" constant="12" id="8K1-AY-FrX"/>
                             <constraint firstAttribute="trailing" secondItem="dkA-vC-40m" secondAttribute="trailing" id="9fm-28-Vdr"/>
                             <constraint firstItem="nE5-YO-bCK" firstAttribute="leading" secondItem="i7d-aj-78O" secondAttribute="leading" constant="22" id="BWY-wd-AS1"/>
+                            <constraint firstItem="PJc-bi-4Fq" firstAttribute="leading" secondItem="i7d-aj-78O" secondAttribute="leading" constant="22" id="Dg1-7c-HEd"/>
                             <constraint firstItem="4K9-UO-s7K" firstAttribute="leading" secondItem="i7d-aj-78O" secondAttribute="leadingMargin" id="Ghf-hI-Tvd"/>
                             <constraint firstItem="dkA-vC-40m" firstAttribute="top" secondItem="Tpc-g1-kAZ" secondAttribute="bottom" id="J95-Kq-YxH"/>
-                            <constraint firstAttribute="trailing" secondItem="ufE-m0-vgP" secondAttribute="trailing" constant="22" id="Jhp-va-hCS"/>
                             <constraint firstAttribute="trailing" secondItem="Tow-Yv-ojK" secondAttribute="trailing" id="LXf-vj-4Ta"/>
+                            <constraint firstItem="Tow-Yv-ojK" firstAttribute="top" secondItem="PJc-bi-4Fq" secondAttribute="bottom" id="LsJ-mU-GON"/>
                             <constraint firstItem="nE5-YO-bCK" firstAttribute="top" secondItem="TqZ-cC-8R6" secondAttribute="bottom" constant="10" id="NqA-pn-lx6"/>
+                            <constraint firstAttribute="trailing" secondItem="PJc-bi-4Fq" secondAttribute="trailing" constant="22" id="XCk-Pb-IXZ"/>
                             <constraint firstItem="wLy-sf-MBc" firstAttribute="height" secondItem="dkA-vC-40m" secondAttribute="height" id="cYU-LH-lua"/>
                             <constraint firstItem="TqZ-cC-8R6" firstAttribute="leading" secondItem="i7d-aj-78O" secondAttribute="leading" constant="22" id="dZa-4P-FkE"/>
                             <constraint firstItem="wLy-sf-MBc" firstAttribute="top" secondItem="Tpc-g1-kAZ" secondAttribute="bottom" id="eRW-Rb-ATV"/>
@@ -247,22 +249,21 @@
                             <constraint firstItem="4K9-UO-s7K" firstAttribute="top" secondItem="Tpc-g1-kAZ" secondAttribute="bottom" constant="9" id="gzb-xV-l1Z"/>
                             <constraint firstItem="xRD-wG-L3V" firstAttribute="top" secondItem="Tow-Yv-ojK" secondAttribute="bottom" id="lHF-bY-fG1"/>
                             <constraint firstAttribute="trailing" secondItem="nE5-YO-bCK" secondAttribute="trailing" constant="22" id="mkc-GA-Rdn"/>
-                            <constraint firstItem="ufE-m0-vgP" firstAttribute="top" secondItem="nE5-YO-bCK" secondAttribute="bottom" constant="10" id="nND-wS-GVB"/>
                             <constraint firstItem="wLy-sf-MBc" firstAttribute="leading" secondItem="dkA-vC-40m" secondAttribute="leading" id="rcb-r2-fls"/>
-                            <constraint firstItem="ufE-m0-vgP" firstAttribute="leading" secondItem="i7d-aj-78O" secondAttribute="leading" constant="22" id="sWo-Xq-4Wf"/>
+                            <constraint firstItem="PJc-bi-4Fq" firstAttribute="top" secondItem="nE5-YO-bCK" secondAttribute="bottom" constant="10" id="spi-2q-a5A"/>
                             <constraint firstItem="dkA-vC-40m" firstAttribute="leading" secondItem="i7d-aj-78O" secondAttribute="leading" id="y18-Zk-B6A"/>
                             <constraint firstItem="Tow-Yv-ojK" firstAttribute="leading" secondItem="i7d-aj-78O" secondAttribute="leading" id="zRY-C0-MXc"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="contentTextField" destination="ufE-m0-vgP" id="Yw0-VP-WoF"/>
+                        <outlet property="contentTextView" destination="PJc-bi-4Fq" id="CfS-bT-rga"/>
                         <outlet property="selectedImageView" destination="dkA-vC-40m" id="oII-ZE-zFw"/>
                         <outlet property="titleTextField" destination="TqZ-cC-8R6" id="nT8-2j-kMZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2GI-fX-c9v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1679" y="240"/>
+            <point key="canvasLocation" x="1420" y="235"/>
         </scene>
     </scenes>
     <resources>
